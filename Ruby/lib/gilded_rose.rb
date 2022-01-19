@@ -19,7 +19,8 @@ class GildedRose
           @item = Sulfuras.new(quality, days_remaining)
          item.tick
       when "Backstage passes to a TAFKAL80ETC concert"
-         backstage_tick
+         @item = Backstage.new(quality, days_remaining)
+         item.tick
     end
   end
 
@@ -31,15 +32,6 @@ class GildedRose
   def days_remaining
     return item.days_remaining if item
     @days_remaining
-  end
-
-  def backstage_tick
-    @days_remaining -= 1
-    return if quality == 50
-    @quality += 1
-    @quality += 1 if days_remaining < 10
-    @quality += 1 if days_remaining < 5
-    @quality = 0 if days_remaining < 0
   end
 end
 
@@ -72,5 +64,16 @@ end
 
 class Sulfuras < Item
   def tick
+  end
+end
+
+class Backstage < Item
+  def tick
+    @days_remaining -= 1
+    return if quality == 50
+    @quality += 1
+    @quality += 1 if days_remaining < 10
+    @quality += 1 if days_remaining < 5
+    @quality = 0 if days_remaining < 0
   end
 end
