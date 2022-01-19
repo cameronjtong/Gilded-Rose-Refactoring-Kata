@@ -1,3 +1,9 @@
+require_relative 'item'
+require_relative 'normal_item'
+require_relative 'aged_brie'
+require_relative 'sulfuras'
+require_relative 'backstage'
+
 class GildedRose
   attr_reader :item
 
@@ -30,48 +36,5 @@ class GildedRose
   def days_remaining
     return item.days_remaining if item
     @days_remaining
-  end
-end
-
-class Item
-  attr_reader :quality, :days_remaining
-
-  def initialize(quality, days_remaining)
-    @quality, @days_remaining = quality, days_remaining
-  end
-end
-
-class NormalItem < Item
-  def tick
-     @days_remaining -= 1
-    return if quality == 0
-    @quality -= 1
-    @quality -= 1 if days_remaining < 0
-  end
-end
-
-class AgedBrie < Item
-  def tick
-     @days_remaining -= 1
-    return if quality == 50
-    @quality += 1
-    return if quality == 50
-    @quality += 1 if days_remaining < 0
-  end
-end
-
-class Sulfuras < Item
-  def tick
-  end
-end
-
-class Backstage < Item
-  def tick
-    @days_remaining -= 1
-    return if quality == 50
-    @quality += 1
-    @quality += 1 if days_remaining < 10
-    @quality += 1 if days_remaining < 5
-    @quality = 0 if days_remaining < 0
   end
 end
