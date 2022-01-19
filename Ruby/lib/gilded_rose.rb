@@ -16,7 +16,8 @@ class GildedRose
          @item = AgedBrie.new(quality, days_remaining)
          item.tick
       when "Sulfuras, Hand of Ragnaros"
-         sulfuras_tick
+          @item = Sulfuras.new(quality, days_remaining)
+         item.tick
       when "Backstage passes to a TAFKAL80ETC concert"
          backstage_tick
     end
@@ -30,9 +31,6 @@ class GildedRose
   def days_remaining
     return item.days_remaining if item
     @days_remaining
-  end
-
-  def sulfuras_tick
   end
 
   def backstage_tick
@@ -69,5 +67,10 @@ class AgedBrie < Item
     @quality += 1
     return if quality == 50
     @quality += 1 if days_remaining < 0
+  end
+end
+
+class Sulfuras < Item
+  def tick
   end
 end
