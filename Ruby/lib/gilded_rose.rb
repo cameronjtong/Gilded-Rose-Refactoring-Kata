@@ -13,7 +13,8 @@ class GildedRose
          @item = NormalItem.new(quality, days_remaining)
          item.tick
       when 'Aged Brie'
-         aged_tick
+         @item = AgedBrie.new(quality, days_remaining)
+         item.tick
       when "Sulfuras, Hand of Ragnaros"
          sulfuras_tick
       when "Backstage passes to a TAFKAL80ETC concert"
@@ -29,21 +30,6 @@ class GildedRose
   def days_remaining
     return item.days_remaining if item
     @days_remaining
-  end
-
-  def normal_tick
-    @days_remaining -= 1
-    return if quality == 0
-    @quality -= 1
-    @quality -= 1 if days_remaining < 0
-  end
-
-  def aged_tick
-    @days_remaining -= 1
-    return if quality == 50
-    @quality += 1
-    return if quality == 50
-    @quality += 1 if days_remaining < 0
   end
 
   def sulfuras_tick
@@ -73,5 +59,15 @@ class NormalItem < Item
     return if quality == 0
     @quality -= 1
     @quality -= 1 if days_remaining < 0
+  end
+end
+
+class AgedBrie < Item
+  def tick
+     @days_remaining -= 1
+    return if quality == 50
+    @quality += 1
+    return if quality == 50
+    @quality += 1 if days_remaining < 0
   end
 end
