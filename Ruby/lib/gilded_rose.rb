@@ -47,3 +47,11 @@ class GildedRose
     @quality = 0 if days_remaining < 0
   end
 end
+
+class Item
+  attr_reader :quality, :days_remaining
+
+  def initialize(quality, days_remaining)
+    @quality, @days_remaining = quality, days_remaining
+  end
+end
